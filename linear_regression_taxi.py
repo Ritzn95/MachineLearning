@@ -35,9 +35,9 @@ training_df.describe(include='all')
 
 answer = '''
 What is the maximum fare? 				              Answer: $159.25
-What is the mean distance across all trips? 		Answer: 8.2895 miles
-How many cab companies are in the dataset? 		  Answer: 31
-What is the most frequent payment type? 		    Answer: Credit Card
+What is the mean distance across all trips? 		  Answer: 8.2895 miles
+How many cab companies are in the dataset? 		      Answer: 31
+What is the most frequent payment type? 		      Answer: Credit Card
 Are any features missing data? 				          Answer: No
 '''
 
