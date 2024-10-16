@@ -70,3 +70,24 @@ print("What is the most frequent payment type? \t\tAnswer: {type}".format(
 missing_values = training_df.isnull().sum().sum()
 print("Are any features missing data? \t\t\t\tAnswer:",
       "No" if missing_values == 0 else "Yes")
+
+# @title Code - View correlation matrix
+training_df.corr(numeric_only=True)
+
+# @title Double-click to view answers about the correlation matrix
+
+# Which feature correlates most strongly to the label FARE?
+# ---------------------------------------------------------
+answer = '''
+The feature with the strongest correlation to the FARE is TRIP_MILES.
+As you might expect, TRIP_MILES looks like a good feature to start with to train
+the model. Also, notice that the feature TRIP_SECONDS has a strong correlation
+with fare too.
+'''
+print(answer)
+
+
+# Which feature correlates least strongly to the label FARE?
+# -----------------------------------------------------------
+answer = '''The feature with the weakest correlation to the FARE is TIP_RATE.'''
+print(answer)
