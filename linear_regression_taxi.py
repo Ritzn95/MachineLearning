@@ -113,3 +113,15 @@ def make_plots(df, feature_names, label_name, model_output, sample_size=200):
 
     fig.show()
     return
+
+
+def plot_loss_curve(epochs, rmse, fig):
+    curve = px.line(x=epochs, y=rmse)
+    curve.update_traces(line_color='#ff0000', line_width=3)
+
+    fig.append_trace(curve.data[0], row=1, col=1)
+    fig.update_xaxes(title_text="Epoch", row=1, col=1)
+    fig.update_yaxes(title_text="Root Mean Squared Error",
+                     row=1, col=1, range=[rmse.min()*0.8, rmse.max()])
+
+    return
