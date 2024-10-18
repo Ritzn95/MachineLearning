@@ -142,3 +142,34 @@ def plot_data(df, features, label, fig):
             xaxis_title=features[0], yaxis_title=features[1], zaxis_title=label))
 
     return
+
+
+def plot_model(df, features, weights, bias, fig):
+    df['FARE_PREDICTED'] = bias[0]
+
+    for index, feature in enumerate(features):
+        df['FARE_PREDICTED'] = df['FARE_PREDICTED'] + \
+            weights[index][0] * df[feature]
+
+    if len(features) == 1:
+        model = px.line(df, x=features[0], y='FARE_PREDICTED')
+        model.update_traces(line_color='#ff0000', line_width=3)
+    else:
+        z_name, y_name = "FARE_PREDICTED", features[1]
+        z = [df[z_name].min(), (df[z_name].max() - df[z_name].min()) /
+             2, df[z_name].max()]
+        y = [df[y_name].min(), (df[y_name].max() - df[y_name].min()) /
+             2, df[y_name].max()]
+        x = []
+        for i in range(len(y)):
+            x.append((z[i] - weights[1][0] * y[i] - bias[0]) / weights[0][0])
+
+        plane = pd.DataFrame({'x': x, 'y': y, 'z': [z] * 3})
+
+        light_yellow = [[0, '#89CFF0'], [1, '#FFDB58']]
+        model = go.Figure(data=go.Surface(x=plane['x'], y=plane['y'], z=plane['z'],
+                                          colorscale=light_yellow))
+
+    fig.add_trace(model.data[0], row=1, col=2)
+
+    return
