@@ -173,3 +173,30 @@ def plot_model(df, features, weights, bias, fig):
     fig.add_trace(model.data[0], row=1, col=2)
 
     return
+
+
+def model_info(feature_names, label_name, model_output):
+    weights = model_output[0]
+    bias = model_output[1]
+
+    nl = "\n"
+    header = "-" * 80
+    banner = header + nl + "|" + "MODEL INFO".center(78) + "|" + nl + header
+
+    info = ""
+    equation = label_name + " = "
+
+    for index, feature in enumerate(feature_names):
+        info = info + \
+            "Weight for feature[{}]: {:.3f}\n".format(
+                feature, weights[index][0])
+        equation = equation + \
+            "{:.3f} * {} + ".format(weights[index][0], feature)
+
+    info = info + "Bias: {:.3f}\n".format(bias[0])
+    equation = equation + "{:.3f}\n".format(bias[0])
+
+    return banner + nl + info + nl + equation
+
+
+print("SUCCESS: defining plotting functions complete.")
