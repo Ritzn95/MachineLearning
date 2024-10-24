@@ -234,3 +234,20 @@ def plot_loss_curve(epochs, rmse, fig):
                      row=1, col=1, range=[rmse.min()*0.8, rmse.max()])
 
     return
+
+
+def plot_data(df, features, label, fig):
+    if len(features) == 1:
+        scatter = px.scatter(df, x=features[0], y=label)
+    else:
+        scatter = px.scatter_3d(df, x=features[0], y=features[1], z=label)
+
+    fig.append_trace(scatter.data[0], row=1, col=2)
+    if len(features) == 1:
+        fig.update_xaxes(title_text=features[0], row=1, col=2)
+        fig.update_yaxes(title_text=label, row=1, col=2)
+    else:
+        fig.update_layout(scene1=dict(
+            xaxis_title=features[0], yaxis_title=features[1], zaxis_title=label))
+
+    return
